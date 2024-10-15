@@ -13,13 +13,17 @@ app.use(
     credentials: true,
   })
 );
-app.use('/api', router);
 
-app.use(globalErrorHandler);
-app.use(notFound);
-
+// Define the root route before other middleware
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
+
+// Register API routes
+app.use('/api', router);
+
+// Error handling middlewares
+app.use(globalErrorHandler);
+app.use(notFound);
 
 export default app;
